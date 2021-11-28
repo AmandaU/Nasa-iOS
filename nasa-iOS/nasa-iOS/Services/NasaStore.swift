@@ -13,8 +13,10 @@ class NasaStore {
 
     var cancellationToken: AnyCancellable?
 
-    func getEvents(onDone: @escaping ([Event]?) ->Void) {
-        cancellationToken = NasaApi.getEvents()
+    static let instance = NasaStore()
+
+    func getPhotos(onDone: @escaping ([PhotographInfo]?, String?) ->Void) {
+        cancellationToken = NasaApi.getPhotos()
             .sink(
                 receiveCompletion: ({ (completion) in
                     switch completion {
@@ -22,14 +24,39 @@ class NasaStore {
                         break
                     case .failure(let error):
                         print("\(error)")
-                       onDone(nil)
+                        onDone(nil, error.localizedDescription)
+                    }
+                }),
+            receiveValue: {
+                var photos = [PhotographInfo]()
+                if let items = $0.collection.items {
+                   items.forEach({ item in
+                       if let imageSource = item.href,
+                        let data = item.data?[0],
+                          let links = item.links?[0] {
+                           photos.append(PhotographInfo(imageSource: imageSource, data: data, link: links))
+                       }
+                   } )
+                }
+                onDone(photos.isEmpty ? nil : photos, photos.isEmpty ? "There are currenty no NASA images to display" : nil)
+            })
+    }
+
+    func getImageUrl(url: String, onDone: @escaping (String?, String?) ->Void) {
+        cancellationToken = NasaApi.getImageUrl(url: url)
+            .sink(
+                receiveCompletion: ({ (completion) in
+                    switch completion {
+                    case .finished:
+                        break
+                    case .failure(let error):
+                        print("\(error)")
+                        onDone(nil, error.localizedDescription)
                     }
                 }),
             receiveValue: {
 
-                let thing = $0
-                
-                onDone($0.collection.items[0].data)
+                onDone( ($0.isEmpty ?? true) ? "" : $0[0],  nil)
             })
     }
 

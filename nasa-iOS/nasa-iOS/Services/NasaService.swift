@@ -35,8 +35,26 @@ enum NasaApi {
 
 extension NasaApi {
 
-    static func getEvents() -> AnyPublisher<EventCollection, Error> {
+    static func getPhotos() -> AnyPublisher<CollectionDTO, Error> {
         var request = URLRequest(url:  URL(string: "https://images-api.nasa.gov/search?q=%22%22")!)
+        let headers = [
+            // "Authorization": "Bearer \(accessToken)",
+            "Accept": "*/*",
+            "Content-Type": "application/json"
+        ]
+        request.httpMethod = "GET"
+        request.allHTTPHeaderFields = headers
+
+        return apiService.run(request)
+            .map(\.value)
+            .eraseToAnyPublisher()
+    }
+}
+
+extension NasaApi {
+
+    static func getImageUrl(url: String) -> AnyPublisher<[String], Error> {
+        var request = URLRequest(url:  URL(string: url)!)
         let headers = [
             // "Authorization": "Bearer \(accessToken)",
             "Accept": "*/*",
