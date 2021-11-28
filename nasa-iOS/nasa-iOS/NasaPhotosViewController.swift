@@ -21,8 +21,8 @@ class NasaPhotosViewController: UIViewController {
 
 
     override func viewDidLoad() {
-             super.viewDidLoad()
-        NasaStore.instance.getPhotos { photos, error in
+        super.viewDidLoad()
+         NasaStore.instance.getPhotos { photos, error in
             self.activityIndicator.stopAnimating()
             if !(error?.isEmpty ?? true) {
                 self.showAlert(title: "No NASA images", message:  "Unfortunately there is an issue fetching the NASA images. Please try later.")
@@ -37,18 +37,18 @@ class NasaPhotosViewController: UIViewController {
             self.nasaList.dataSource = self.dataSource //
             self.nasaList.reloadData()
         }
+    }
 
-         }
-        override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-            if segue.identifier == Self.showDetailSegueIdentifier,
-               let destination = segue.destination as? NasaDetailViewController,
-               let cell = sender as? UITableViewCell,
-               let indexPath = nasaList.indexPath(for: cell) {
-                if let photo = self.dataSource.photos?[indexPath.row] {
-                    destination.configure(with: photo)
-                }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == Self.showDetailSegueIdentifier,
+           let destination = segue.destination as? NasaDetailViewController,
+           let cell = sender as? UITableViewCell,
+           let indexPath = nasaList.indexPath(for: cell) {
+            if let photo = self.dataSource.photos?[indexPath.row] {
+                destination.configure(with: photo)
             }
         }
+    }
 
     func showAlert(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)

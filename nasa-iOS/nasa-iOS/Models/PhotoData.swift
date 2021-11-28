@@ -45,10 +45,13 @@ struct PhotographInfo {
     init(imageSource: String, data: ItemDTO, link: LinkDTO) {
         self.title = data.title ?? ""
 
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-
-        self.dateCreated = dateFormatter.date(from: data.date_created ?? "") ?? Date()
+        let dateFormatter = ISO8601DateFormatter()
+        if let date = dateFormatter.date(from: data.date_created ?? "") {
+            self.dateCreated = date
+        } else {
+            self.dateCreated = Date()
+        }
+       // self.dateCreated = dateFormatter.date(from: data.date_created ?? "") ?? Date()
         self.description = data.description ?? ""
         self.photographer = data.photographer ?? ""
         self.secondaryCreator = data.secondary_creator ?? ""

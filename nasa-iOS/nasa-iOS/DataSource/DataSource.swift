@@ -30,8 +30,7 @@ class DataSource: NSObject, UITableViewDataSource {
                         cell.photoImageView.image = image
                    }
             cell.configure(photo: photo)
-            // tableView.reloadRows(at: [indexPath], with: .none)
-            return cell
+             return cell
         } else {
             return  UITableViewCell()
         }

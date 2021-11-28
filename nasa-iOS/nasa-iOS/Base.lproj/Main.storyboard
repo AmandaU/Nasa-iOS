@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="lhF-4s-bHn">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="WUu-1c-2fy">
     <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -9,71 +9,72 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--The Milky Way-->
+        <!--Nasa Detail View Controller-->
         <scene sceneID="f0b-5L-fTu">
             <objects>
-                <viewController id="kB7-pm-M6m" customClass="NasaDetailViewController" customModule="nasa_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController extendedLayoutIncludesOpaqueBars="YES" id="kB7-pm-M6m" customClass="NasaDetailViewController" customModule="nasa_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dlD-gq-hbh">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8H6-17-ThE">
-                                <rect key="frame" x="0.0" y="44" width="414" height="250"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="300"/>
                                 <color key="backgroundColor" systemColor="systemGray5Color"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="8H6-17-ThE" secondAttribute="height" multiplier="207:125" id="NHI-jf-uf5"/>
+                                    <constraint firstAttribute="width" secondItem="8H6-17-ThE" secondAttribute="height" multiplier="207:150" id="NHI-jf-uf5"/>
                                 </constraints>
                             </imageView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="-20" translatesAutoresizingMaskIntoConstraints="NO" id="m7y-Ua-GDF">
-                                <rect key="frame" x="10" y="314" width="414" height="402"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rnB-nD-Sjh">
+                                <rect key="frame" x="0.0" y="350" width="414" height="128"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y6v-i9-sh0">
-                                        <rect key="frame" x="5" y="0.0" width="404" height="391.66666666666669"/>
+                                        <rect key="frame" x="10" y="20" width="394" height="25.333333333333329"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DaD-B3-jDh">
-                                        <rect key="frame" x="5" y="371.66666666666663" width="404" height="50.333333333333314"/>
+                                        <rect key="frame" x="10" y="55.333333333333321" width="394" height="20.333333333333336"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gE0-Ui-iXx">
-                                        <rect key="frame" x="5" y="402" width="404" height="0.0"/>
+                                        <rect key="frame" x="10" y="119.99999999999999" width="394" height="20.333333333333329"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="Y6v-i9-sh0" firstAttribute="leading" secondItem="m7y-Ua-GDF" secondAttribute="leading" constant="5" id="1BU-Bf-tEf"/>
-                                    <constraint firstAttribute="trailing" secondItem="gE0-Ui-iXx" secondAttribute="trailing" constant="5" id="7a2-ga-FMU"/>
-                                    <constraint firstItem="DaD-B3-jDh" firstAttribute="top" secondItem="Y6v-i9-sh0" secondAttribute="bottom" constant="5" id="VKV-oX-NnS"/>
-                                    <constraint firstAttribute="trailing" secondItem="DaD-B3-jDh" secondAttribute="trailing" constant="5" id="WeZ-xi-tj6"/>
-                                    <constraint firstItem="DaD-B3-jDh" firstAttribute="leading" secondItem="m7y-Ua-GDF" secondAttribute="leading" constant="5" id="X02-2P-mlt"/>
-                                    <constraint firstItem="gE0-Ui-iXx" firstAttribute="leading" secondItem="m7y-Ua-GDF" secondAttribute="leading" constant="5" id="dsM-Y2-JqA"/>
-                                    <constraint firstAttribute="trailing" secondItem="Y6v-i9-sh0" secondAttribute="trailing" constant="20" id="kPI-EE-lL6"/>
-                                    <constraint firstItem="gE0-Ui-iXx" firstAttribute="top" secondItem="DaD-B3-jDh" secondAttribute="bottom" constant="10" id="vPl-NG-t8Y"/>
+                                    <constraint firstItem="SYQ-nF-3zz" firstAttribute="trailing" secondItem="Y6v-i9-sh0" secondAttribute="trailing" constant="10" id="31B-pX-GLf"/>
+                                    <constraint firstItem="gE0-Ui-iXx" firstAttribute="leading" secondItem="rnB-nD-Sjh" secondAttribute="leading" constant="10" id="BTl-MW-lbS"/>
+                                    <constraint firstItem="DaD-B3-jDh" firstAttribute="leading" secondItem="rnB-nD-Sjh" secondAttribute="leading" constant="10" id="JvJ-kJ-PbL"/>
+                                    <constraint firstItem="gE0-Ui-iXx" firstAttribute="top" secondItem="DaD-B3-jDh" secondAttribute="bottom" constant="44.329999999999998" id="OxQ-jy-sFN"/>
+                                    <constraint firstItem="DaD-B3-jDh" firstAttribute="top" secondItem="Y6v-i9-sh0" secondAttribute="bottom" constant="10" id="Oyi-oi-YA6"/>
+                                    <constraint firstItem="Y6v-i9-sh0" firstAttribute="top" secondItem="rnB-nD-Sjh" secondAttribute="top" constant="20" id="Rxc-9R-xeo"/>
+                                    <constraint firstItem="Y6v-i9-sh0" firstAttribute="leading" secondItem="rnB-nD-Sjh" secondAttribute="leading" constant="10" id="WEf-MM-5NO"/>
+                                    <constraint firstItem="SYQ-nF-3zz" firstAttribute="trailing" secondItem="DaD-B3-jDh" secondAttribute="trailing" constant="10" id="j2o-Kt-Vgi"/>
+                                    <constraint firstItem="SYQ-nF-3zz" firstAttribute="trailing" secondItem="gE0-Ui-iXx" secondAttribute="trailing" constant="10" id="kJ3-co-wPL"/>
                                 </constraints>
-                            </stackView>
+                                <viewLayoutGuide key="contentLayoutGuide" id="Ap4-P8-HEP"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="SYQ-nF-3zz"/>
+                            </scrollView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="kns-o0-a1L"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="m7y-Ua-GDF" firstAttribute="leading" secondItem="kns-o0-a1L" secondAttribute="leading" id="CvW-mj-Bik"/>
-                            <constraint firstItem="kns-o0-a1L" firstAttribute="bottom" secondItem="m7y-Ua-GDF" secondAttribute="bottom" constant="20" id="K8x-Ap-IH1"/>
-                            <constraint firstItem="m7y-Ua-GDF" firstAttribute="trailing" secondItem="kns-o0-a1L" secondAttribute="trailing" constant="10" id="bVF-kk-e3A"/>
+                            <constraint firstItem="kns-o0-a1L" firstAttribute="trailing" secondItem="rnB-nD-Sjh" secondAttribute="trailing" id="SX3-Od-lSt"/>
+                            <constraint firstItem="kns-o0-a1L" firstAttribute="bottom" secondItem="rnB-nD-Sjh" secondAttribute="bottom" id="Vyg-FW-gEF"/>
+                            <constraint firstItem="rnB-nD-Sjh" firstAttribute="leading" secondItem="kns-o0-a1L" secondAttribute="leading" id="cSg-PT-dxA"/>
                             <constraint firstItem="8H6-17-ThE" firstAttribute="top" secondItem="kns-o0-a1L" secondAttribute="top" id="fc4-bv-gbc"/>
+                            <constraint firstItem="rnB-nD-Sjh" firstAttribute="top" secondItem="8H6-17-ThE" secondAttribute="bottom" constant="6" id="mj5-7l-MQy"/>
                             <constraint firstItem="8H6-17-ThE" firstAttribute="leading" secondItem="kns-o0-a1L" secondAttribute="leading" id="oxU-O5-cCG"/>
                             <constraint firstItem="kns-o0-a1L" firstAttribute="trailing" secondItem="8H6-17-ThE" secondAttribute="trailing" id="qGV-Dk-obv"/>
-                            <constraint firstItem="kns-o0-a1L" firstAttribute="trailing" secondItem="m7y-Ua-GDF" secondAttribute="trailing" id="r5D-gp-2jm"/>
-                            <constraint firstItem="m7y-Ua-GDF" firstAttribute="top" secondItem="8H6-17-ThE" secondAttribute="bottom" constant="20" id="sak-De-FLL"/>
-                            <constraint firstItem="m7y-Ua-GDF" firstAttribute="leading" secondItem="kns-o0-a1L" secondAttribute="leading" constant="10" id="wRY-zs-y0M"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="The Milky Way" id="RxJ-zC-eA9">
-                        <barButtonItem key="backBarButtonItem" title="The Milky Way" id="xUf-JT-P2T"/>
+                    <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="XG2-g2-e6W">
+                        <barButtonItem key="backBarButtonItem" title="The Milky Way" id="sk4-94-L9E"/>
                     </navigationItem>
                     <connections>
                         <outlet property="descriptionlabel" destination="gE0-Ui-iXx" id="Oyl-Ba-h3E"/>
@@ -84,12 +85,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VLD-Qr-PMz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1474" y="-340"/>
+            <point key="canvasLocation" x="2381.1594202898555" y="-340.76086956521743"/>
         </scene>
         <!--The Milky Way-->
         <scene sceneID="zv9-XR-F3z">
             <objects>
-                <viewController title="The Milky Way" interfaceStyle="light" id="lhF-4s-bHn" customClass="NasaPhotosViewController" customModule="nasa_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController extendedLayoutIncludesOpaqueBars="YES" interfaceStyle="light" id="lhF-4s-bHn" customClass="NasaPhotosViewController" customModule="nasa_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4Mu-kl-AUH">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -180,8 +181,8 @@
                             <constraint firstItem="UrX-hm-RAg" firstAttribute="bottom" secondItem="SbB-Uw-ue1" secondAttribute="bottom" id="vyA-Ew-DRF"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="The Milky Way" id="omQ-z3-nKc"/>
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <navigationItem key="navigationItem" title="The Milky Way" largeTitleDisplayMode="never" id="oma-45-68Z"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <connections>
                         <outlet property="activityIndicator" destination="JdN-KJ-ymM" id="cf6-0K-gCK"/>
                         <outlet property="nasaList" destination="SbB-Uw-ue1" id="aw6-3o-jIp"/>
@@ -189,28 +190,25 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="94f-iP-FE2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="198.55072463768118" y="-339.50892857142856"/>
+            <point key="canvasLocation" x="1105.7971014492755" y="-339.94565217391306"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="4C5-z3-8u5">
+        <scene sceneID="E0i-wK-sBw">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="vyI-P0-EmD" sceneMemberID="viewController">
+                <navigationController extendedLayoutIncludesOpaqueBars="YES" automaticallyAdjustsScrollViewInsets="NO" id="WUu-1c-2fy" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="XGK-A9-Iyh">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="5pT-yE-TNU">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
-                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="UfJ-rG-5ge">
-                        <autoresizingMask key="autoresizingMask"/>
-                    </toolbar>
                     <connections>
-                        <segue destination="lhF-4s-bHn" kind="relationship" relationship="rootViewController" destinationCreationSelector="toDetailSegue" id="YgE-zM-5KR"/>
+                        <segue destination="lhF-4s-bHn" kind="relationship" relationship="rootViewController" id="mWo-Lt-ruo"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Cy9-Cb-bao" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bXg-gq-oRw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-711.59420289855075" y="-339.50892857142856"/>
+            <point key="canvasLocation" x="198.55072463768118" y="-339.94565217391306"/>
         </scene>
     </scenes>
     <resources>

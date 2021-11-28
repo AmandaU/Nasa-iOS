@@ -9,13 +9,9 @@ import SwiftUI
 
 class ImageLoader {
 
-//    var task: URLSessionDownloadTask!
-//    var session: URLSession!
     var cache: NSCache<NSString, UIImage>!
 
     init() {
-      //  session = URLSession.shared
-      //  task = URLSessionDownloadTask()
         self.cache = NSCache()
     }
 
@@ -25,11 +21,15 @@ class ImageLoader {
                 completionHandler(image)
             }
         } else {
-//            let placeholder = #imageLiteral(resourceName: "placeholder")
-//            DispatchQueue.main.async {
-//                completionHandler(placeholder)
-//            }
-            let url: URL! = URL(string: imagePath)
+
+            guard let url = URL(string: imagePath) else {
+                let placeholder = UIImage(named: "placeholder") ?? UIImage()
+                DispatchQueue.main.async {
+                    completionHandler(placeholder)
+                }
+                return
+            }
+
             let task = URLSession.shared.dataTask(with: url) { data, response, error in
                 guard let data = data else { return }
                 let img: UIImage! = UIImage(data: data)
@@ -38,7 +38,6 @@ class ImageLoader {
                     completionHandler(img)
                 }
             }
-
             task.resume()
         }
     }
