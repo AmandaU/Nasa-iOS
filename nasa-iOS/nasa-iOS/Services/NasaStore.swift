@@ -9,13 +9,25 @@ import Foundation
 import Combine
 import UIKit
 
-class NasaStore {
+struct UrlModel {
+    let url: String?
+    let error: String?
+}
 
+class NasaStore: ObservableObject {
+
+    @Published var photos = [PhotographInfo]()
+    let photosFetched = PassthroughSubject<String?, Never>()
+    let photoUrlFetched = PassthroughSubject<UrlModel, Never>()
     var cancellationToken: AnyCancellable?
 
     static let instance = NasaStore()
 
-    func getPhotos(onDone: @escaping ([PhotographInfo]?, String?) ->Void) {
+    init() {
+        self.getPhotos()
+    }
+
+    private func getPhotos() {
         cancellationToken = NasaApi.getPhotos()
             .sink(
                 receiveCompletion: ({ (completion) in
@@ -24,25 +36,25 @@ class NasaStore {
                         break
                     case .failure(let error):
                         print("\(error)")
-                        onDone(nil, error.localizedDescription)
+                        self.photosFetched.send(error.localizedDescription)
                     }
                 }),
             receiveValue: {
-                var photos = [PhotographInfo]()
+                self.photos = [PhotographInfo]()
                 if let items = $0.collection.items {
                    items.forEach({ item in
                        if let imageSource = item.href,
                         let data = item.data?[0],
                           let links = item.links?[0] {
-                           photos.append(PhotographInfo(imageSource: imageSource, data: data, link: links))
+                           self.photos.append(PhotographInfo(imageSource: imageSource, data: data, link: links))
                        }
                    } )
                 }
-                onDone(photos.isEmpty ? nil : photos, photos.isEmpty ? "There are currenty no NASA images to display" : nil)
+                self.photosFetched.send(self.photos.isEmpty ? "There are currenty no NASA images to display" : nil)
             })
     }
 
-    func getImageUrl(url: String, onDone: @escaping (String?, String?) ->Void) {
+    func getImageUrl(url: String) {
         cancellationToken = NasaApi.getImageUrl(url: url)
             .sink(
                 receiveCompletion: ({ (completion) in
@@ -51,12 +63,14 @@ class NasaStore {
                         break
                     case .failure(let error):
                         print("\(error)")
-                        onDone(nil, error.localizedDescription)
+                        self.photoUrlFetched.send(UrlModel(url: nil, error: error.localizedDescription))
+
                     }
                 }),
             receiveValue: {
-
-                onDone( ($0.isEmpty ?? true) ? "" : $0[0],  nil)
+                let url = $0.isEmpty ? nil : $0[0]
+                let error = url == nil ? "We could not retrieve the image. Please try later" : nil
+                self.photoUrlFetched.send(UrlModel(url: url, error: error))
             })
     }
 

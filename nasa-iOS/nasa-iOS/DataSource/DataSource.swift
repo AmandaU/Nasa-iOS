@@ -11,12 +11,12 @@ import Foundation
 import UIKit
 
 class DataSource: NSObject, UITableViewDataSource {
-    var photos: [PhotographInfo]? = nil
+  var photos: [PhotographInfo]? = nil
 
     var imageLoader = ImageLoader()
    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.photos?.count ?? 0
+        return photos?.count ?? 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

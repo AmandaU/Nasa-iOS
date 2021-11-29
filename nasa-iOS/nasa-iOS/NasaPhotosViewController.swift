@@ -7,38 +7,41 @@
 
 import Foundation
 import UIKit
-
+import Combine
 
 class NasaPhotosViewController: UIViewController {
     static let photoCellIdentifier = "PhotoCell"
     static let showDetailSegueIdentifier = "toDetailSegue"
-
+    
     @IBOutlet weak var nasaList: UITableView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-
-
+    private var cancellables: Set<AnyCancellable> = []
+    
     var dataSource = DataSource()
-
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-         NasaStore.instance.getPhotos { photos, error in
+        bindStore()
+    }
+    
+    private func bindStore() {
+        
+        NasaStore.instance.photosFetched.sink { [weak self] error in
+            guard let self = self else {
+                return
+            }
             self.activityIndicator.stopAnimating()
-            if !(error?.isEmpty ?? true) {
-                self.showAlert(title: "No NASA images", message:  "Unfortunately there is an issue fetching the NASA images. Please try later.")
+            
+            if let error = error {
+                self.showAlert(title: "No NASA images", message: error)
                 return
             }
-
-            if !(error?.isEmpty ?? true)  {
-                self.showAlert(title: "No NASA images", message:  "Unfortunately there are no NASA images currently. Please try later.")
-                return
-            }
-            self.dataSource.photos = photos // Pass data to DataSource class
+            self.dataSource.photos =  NasaStore.instance.photos // Pass data to DataSource class
             self.nasaList.dataSource = self.dataSource //
             self.nasaList.reloadData()
-        }
+        }.store(in: &cancellables)
     }
-
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Self.showDetailSegueIdentifier,
            let destination = segue.destination as? NasaDetailViewController,
@@ -48,13 +51,5 @@ class NasaPhotosViewController: UIViewController {
                 destination.configure(with: photo)
             }
         }
-    }
-
-    func showAlert(title: String, message: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-
-        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-
-        self.present(alert, animated: true)
     }
 }

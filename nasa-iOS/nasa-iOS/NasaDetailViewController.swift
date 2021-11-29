@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 class NasaDetailViewController: UIViewController {
 
@@ -15,11 +16,39 @@ class NasaDetailViewController: UIViewController {
     @IBOutlet weak var imageView: UIImageView!
 
     var imageLoader = ImageLoader()
+    private var cancellables: Set<AnyCancellable> = []
 
     var photo: PhotographInfo?
 
     func configure(with photo: PhotographInfo) {
         self.photo = photo
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        bindStore()
+    }
+
+    private func bindStore() {
+
+        NasaStore.instance.photoUrlFetched.sink { [weak self] urlModel in
+            guard let self = self else {
+                return
+            }
+
+            if let error = urlModel.error {
+                self.imageView.stopShimmeringAnimation()
+                self.showAlert(title: "No NASA image", message: error)
+                return
+            }
+
+            if let url = urlModel.url {
+                self.imageLoader.obtainImageWithPath(imagePath: url) { (image) in
+                    self.imageView.stopShimmeringAnimation()
+                    self.imageView.image = image
+                }
+            }
+        }.store(in: &cancellables)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -30,33 +59,6 @@ class NasaDetailViewController: UIViewController {
         self.infoLabel.text = photo.info
         self.descriptionlabel.text = photo.description
         self.imageView.startShimmeringAnimation(direction: .leftToRight)
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        guard let url = self.photo?.imageSource else {
-            return
-        }
-        NasaStore.instance.getImageUrl(url: url) { url, error in
-            if !(error?.isEmpty ?? true) {
-                self.imageView.stopShimmeringAnimation()
-                self.showAlert(title: "No NASA image", message: "Unfortunatley we could not retireve the associated image. Please try later")
-            } else{
-                if let url = url {
-                    self.imageLoader.obtainImageWithPath(imagePath: url) { (image) in
-                        self.imageView.stopShimmeringAnimation()
-                        self.imageView.image = image
-                    }
-                }
-            }
-        }
-
-    }
-
-    func showAlert(title: String, message: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-
-        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-
-        self.present(alert, animated: true)
+        NasaStore.instance.getImageUrl(url: photo.imageSource)
     }
 }
