@@ -6,11 +6,12 @@
 //
 
 import XCTest
+import Combine
 @testable import nasa_iOS
 
 class nasa_iOSTests: XCTestCase {
 
-    var photos = [PhotographInfo]()
+    private var cancellables: Set<AnyCancellable> = []
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -22,14 +23,12 @@ class nasa_iOSTests: XCTestCase {
 
     func testGetPhoto_Success() {
         let validation = expectation(description: "FullFill")
-        NasaStore.instance.getPhotos(onDone: { photos, error in
-            if let photos = photos  {
-                self.photos = photos
-            }
+        NasaStore.instance.photosFetched.sink { [weak self] error in
             validation.fulfill()
-        })
+        }.store(in: &cancellables)
+
         self.waitForExpectations(timeout: 10) { error in
-            XCTAssertTrue(!self.photos.isEmpty)
+            XCTAssertTrue(!NasaStore.instance.photos.isEmpty)
         }
     }
 

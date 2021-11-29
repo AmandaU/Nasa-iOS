@@ -21,11 +21,11 @@ class NasaPhotosViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.accessibilityIdentifier = "onImagesView"
         bindStore()
     }
     
     private func bindStore() {
-        
         NasaStore.instance.photosFetched.sink { [weak self] error in
             guard let self = self else {
                 return

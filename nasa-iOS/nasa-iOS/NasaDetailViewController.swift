@@ -26,11 +26,11 @@ class NasaDetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.accessibilityIdentifier = "onDetailView"
         bindStore()
     }
 
     private func bindStore() {
-
         NasaStore.instance.photoUrlFetched.sink { [weak self] urlModel in
             guard let self = self else {
                 return

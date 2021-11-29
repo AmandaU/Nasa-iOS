@@ -22,10 +22,21 @@ class nasa_iOSUITests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testExample() throws {
+    func testImagesView() throws {
         // UI tests must launch the application that they test.
         let app = XCUIApplication()
         app.launch()
+        XCTAssertTrue(app.isDisplayingImages)
+
+        app.swipeLeft()
+
+        XCTAssertTrue(app.isDisplayingDetailAndImage)
+
+        // Tap the "Done" button
+        app.navigationBars.buttons.element(boundBy: 0).tap()
+
+        // Onboarding should no longer be displayed
+        XCTAssertFalse(app.isDisplayingDetailAndImage)
 
         // Use recording to get started writing UI tests.
         // Use XCTAssert and related functions to verify your tests produce the correct results.

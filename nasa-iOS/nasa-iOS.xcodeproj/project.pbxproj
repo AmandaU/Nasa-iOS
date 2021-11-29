@@ -19,6 +19,7 @@
 		AA06495027525F8B007E98E8 /* PhotoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA06494F27525F8B007E98E8 /* PhotoData.swift */; };
 		AA06495227525FFF007E98E8 /* NasaStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA06495127525FFF007E98E8 /* NasaStore.swift */; };
 		AA0649542752607F007E98E8 /* NasaPhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0649532752607F007E98E8 /* NasaPhotosViewController.swift */; };
+		AA79234B2754BB0200F32EE7 /* UITextExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA7923492754BA9E00F32EE7 /* UITextExtensions.swift */; };
 		AA7BB0B127527A0000AC2365 /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA7BB0B027527A0000AC2365 /* DataSource.swift */; };
 		AA7BB0B427527F1500AC2365 /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA7BB0B327527F1500AC2365 /* PhotoCell.swift */; };
 		AAC12D5227537FAA007D7715 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC12D5127537FAA007D7715 /* ImageLoader.swift */; };
@@ -61,6 +62,7 @@
 		AA06494F27525F8B007E98E8 /* PhotoData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoData.swift; sourceTree = "<group>"; };
 		AA06495127525FFF007E98E8 /* NasaStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NasaStore.swift; sourceTree = "<group>"; };
 		AA0649532752607F007E98E8 /* NasaPhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NasaPhotosViewController.swift; sourceTree = "<group>"; };
+		AA7923492754BA9E00F32EE7 /* UITextExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextExtensions.swift; sourceTree = "<group>"; };
 		AA7BB0B027527A0000AC2365 /* DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSource.swift; sourceTree = "<group>"; };
 		AA7BB0B327527F1500AC2365 /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
 		AAC12D5127537FAA007D7715 /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 		AA06493927525197007E98E8 /* nasa-iOSUITests */ = {
 			isa = PBXGroup;
 			children = (
+				AA7923492754BA9E00F32EE7 /* UITextExtensions.swift */,
 				AA06493A27525197007E98E8 /* nasa_iOSUITests.swift */,
 				AA06493C27525197007E98E8 /* nasa_iOSUITestsLaunchTests.swift */,
 			);
@@ -346,6 +349,7 @@
 			files = (
 				AA06493D27525197007E98E8 /* nasa_iOSUITestsLaunchTests.swift in Sources */,
 				AA06493B27525197007E98E8 /* nasa_iOSUITests.swift in Sources */,
+				AA79234B2754BB0200F32EE7 /* UITextExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
