@@ -45,6 +45,9 @@ class NasaPhotosViewController: UIViewController {
         super.viewDidAppear(animated)
         // In case the photos were fetched in a previous scenario before this view was presented
         self.nasaList.reloadData()
+        if !NasaStore.instance.photos.isEmpty {
+            self.activityIndicator.stopAnimating()
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
