@@ -11,12 +11,11 @@ import Foundation
 import UIKit
 
 class DataSource: NSObject, UITableViewDataSource {
-  var photos: [PhotographInfo]? = nil
 
     var imageLoader = ImageLoader()
-   
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return photos?.count ?? 0
+        return NasaStore.instance.photos.count ?? 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -24,16 +23,13 @@ class DataSource: NSObject, UITableViewDataSource {
             fatalError("Unable to dequeue PhotoCell")
         }
 
-        if let photo = photos?[indexPath.row] {
-            imageLoader.obtainImageWithPath(imagePath: photo.thumb) { (image) in
-                cell.endLoading()
-                        cell.photoImageView.image = image
-                   }
-            cell.configure(photo: photo)
-             return cell
-        } else {
-            return  UITableViewCell()
+        let photo = NasaStore.instance.photos[indexPath.row]
+        imageLoader.obtainImageWithPath(imagePath: photo.thumb) { (image) in
+            cell.endLoading()
+            cell.photoImageView.image = image
         }
+        cell.configure(photo: photo)
+        return cell
     }
 }
 

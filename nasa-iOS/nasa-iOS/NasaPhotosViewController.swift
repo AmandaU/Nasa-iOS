@@ -26,6 +26,7 @@ class NasaPhotosViewController: UIViewController {
     }
     
     private func bindStore() {
+        self.nasaList.dataSource = self.dataSource //
         NasaStore.instance.photosFetched.sink { [weak self] error in
             guard let self = self else {
                 return
@@ -36,10 +37,14 @@ class NasaPhotosViewController: UIViewController {
                 self.showAlert(title: "No NASA images", message: error)
                 return
             }
-            self.dataSource.photos =  NasaStore.instance.photos // Pass data to DataSource class
-            self.nasaList.dataSource = self.dataSource //
-            self.nasaList.reloadData()
+           self.nasaList.reloadData()
         }.store(in: &cancellables)
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        // In case the photos were fetched in a previous scenario before this view was presented
+        self.nasaList.reloadData()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -47,9 +52,8 @@ class NasaPhotosViewController: UIViewController {
            let destination = segue.destination as? NasaDetailViewController,
            let cell = sender as? UITableViewCell,
            let indexPath = nasaList.indexPath(for: cell) {
-            if let photo = self.dataSource.photos?[indexPath.row] {
-                destination.configure(with: photo)
-            }
+            let photo = NasaStore.instance.photos[indexPath.row] 
+            destination.configure(with: photo)
         }
     }
 }
