@@ -51,7 +51,6 @@ struct PhotographInfo {
         } else {
             self.dateCreated = Date()
         }
-       // self.dateCreated = dateFormatter.date(from: data.date_created ?? "") ?? Date()
         self.description = data.description ?? ""
         self.photographer = data.photographer ?? ""
         self.secondaryCreator = data.secondary_creator ?? ""
